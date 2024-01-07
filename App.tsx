@@ -1,20 +1,56 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from '@react-navigation/native';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Login from './app/screens/Login';
+import { useEffect, useState } from 'react';
+import { User, onAuthStateChanged } from 'firebase/auth';
+import { FIREBASE_AUTH } from './firebaseConfig';
+import { SafeAreaProvider } from 'react-native-safe-area-context';
+import Blank from './app/screens/Blank';
+import Home from './app/screens/Home';
+import Start from './app/screens/Start';
+const Stack = createNativeStackNavigator();
 
-export default function App() {
+const InsideStack = createNativeStackNavigator();
+
+function InsideLayout() {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <InsideStack.Navigator>
+      <InsideStack.Screen name='Home' component={Home}/>
+    </InsideStack.Navigator>
   );
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function StartLayout() {
+  return (
+    <InsideStack.Navigator>
+      <Stack.Screen name='Start' component={Start} options={{ headerShown: false }}></Stack.Screen>
+      <Stack.Screen name='Login' component={Login} options={{ headerShown: false }}></Stack.Screen>
+    </InsideStack.Navigator>
+  );
+}
+
+export default function App() {
+  return (
+    <SafeAreaProvider>
+      <AppContent />
+    </SafeAreaProvider>
+  );
+}
+
+function AppContent() {
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    onAuthStateChanged(FIREBASE_AUTH, (user) => {
+      setUser(user);
+    })
+  }, [])
+  return (
+    <NavigationContainer>
+      <Stack.Navigator initialRouteName='Start'>
+        {user ? <Stack.Screen name='Inside' component={InsideLayout} options={{ headerShown: false }}></Stack.Screen> 
+        : <Stack.Screen name='StartScreen' component={StartLayout} options={{ headerShown: false }}></Stack.Screen>}
+      </Stack.Navigator>
+    </NavigationContainer>
+  );
+}
