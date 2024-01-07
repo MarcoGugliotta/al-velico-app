@@ -25,7 +25,7 @@ export default function Start({ navigation }) {
         mode="outlined"
         buttonColor={undefined}
         textColor={theme.colors.primary}
-        onPress={() => navigation.navigate('Register')} style={undefined}      >
+        onPress={() => navigation.navigate('SignUp')} style={undefined}      >
         Registrati
       </Button>
     </Background>

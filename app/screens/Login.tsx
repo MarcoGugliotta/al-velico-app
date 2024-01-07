@@ -13,6 +13,7 @@ import { theme } from '../core/theme';
 import BackButton from '../components/BackButton';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
+import handleUserLogin from '../utils/handleUserLogin';
 
 const Login = ({ navigation }) => {
     const [email, setEmail] = useState({ value: '', error: '' })
@@ -47,24 +48,6 @@ const Login = ({ navigation }) => {
         }
     }
 
-    // Funzione per gestire l'accesso dell'utente
-    const handleUserLogin = async (userId) => {
-        // Verifica se il documento della carriera dell'utente esiste già
-        const userCareerRef = doc(FIREBASE_DB, 'careers', userId);
-
-        try {
-            const docSnapshot = await getDoc(userCareerRef);
-            
-            if (!docSnapshot.exists()) {
-                await initializeCareerForUser(userId);
-            } else {
-                console.log('La carriera dell\'utente esiste già.');
-            }
-        } catch (error) {
-            console.error('Errore durante la verifica del documento della carriera dell\'utente:', error);
-        }
-    };
-
     return (
         <Background>
           <BackButton goBack={navigation.goBack} />
@@ -94,17 +77,17 @@ const Login = ({ navigation }) => {
           />
           <View style={styles.forgotPassword}>
             <TouchableOpacity
-              onPress={() => navigation.navigate('ResetPasswordScreen')}
+              onPress={() => navigation.navigate('ResetPassword')}
             >
               <Text style={styles.forgot}>Dimenticata la password?</Text>
             </TouchableOpacity>
           </View>
-          <Button mode="contained" onPress={handleUserLogin} style={undefined} buttonColor={theme.colors.primary} textColor={'white'}>
+          <Button mode="contained" onPress={signIn} style={undefined} buttonColor={theme.colors.primary} textColor={'white'}>
             Login
           </Button>
           <View style={styles.row}>
             <Text>Non hai un account? </Text>
-            <TouchableOpacity onPress={() => navigation.replace('RegisterScreen')}>
+            <TouchableOpacity onPress={() => navigation.replace('SignUp')}>
               <Text style={styles.link}>Registrati</Text>
             </TouchableOpacity>
           </View>
