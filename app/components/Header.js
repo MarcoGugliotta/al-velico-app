@@ -6,7 +6,7 @@ import { theme } from '../core/theme'
 export default function Header(props) {
   return (
     <KeyboardAvoidingView behavior="padding">
-            <Text style={styles.header} {...props} />
+      <Text style={styles.header} {...props} />
     </KeyboardAvoidingView>
   )
 }
