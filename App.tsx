@@ -14,6 +14,7 @@ import { StatusBar } from 'expo-status-bar';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo } from '@expo/vector-icons'; 
 import { FontAwesome } from '@expo/vector-icons'; 
+import Careers from './app/screens/Careers';
 
 const Stack = createNativeStackNavigator();
 
@@ -34,7 +35,7 @@ function Tabs() {
           return (
             <FontAwesome name="user" size={size} color={color}  />
           );
-        }else if (route.name === 'Carriera') {
+        }else if (route.name === 'Carriere') {
           return (
             <FontAwesome name="trophy" size={size} color={color}  />
           );
@@ -45,7 +46,7 @@ function Tabs() {
     })}
   >
       <Tab.Screen name="Home" component={Home} options={{ headerShown: false }} />
-      <Tab.Screen name="Carriera" component={Blank} options={{ headerShown: false }} />
+      <Tab.Screen name="Carriere" component={Careers} options={{ headerShown: false }} />
       <Tab.Screen name="User" component={Blank} options={{ headerShown: false }} />
     </Tab.Navigator>
   );
