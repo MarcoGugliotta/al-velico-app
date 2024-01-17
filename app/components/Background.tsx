@@ -1,27 +1,23 @@
-import React from 'react'
-import { ImageBackground, StyleSheet, KeyboardAvoidingView, Dimensions, Platform } from 'react-native'
-import { theme } from '../core/theme'
+import React from 'react';
+import { View, StyleSheet, KeyboardAvoidingView, Dimensions, Platform } from 'react-native';
+import { theme } from '../core/theme';
 
 export default function Background({ children }) {
   return (
-    <ImageBackground
-      resizeMode="repeat"
-      style={styles.background}
-    >
-      <KeyboardAvoidingView style={styles.container} 
-      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      keyboardVerticalOffset={0}
+    <View style={styles.background}>
+      <KeyboardAvoidingView
+        style={styles.container}
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        keyboardVerticalOffset={0}
       >
         {children}
       </KeyboardAvoidingView>
-    </ImageBackground>
-  )
+    </View>
+  );
 }
 
 const { width: screenWidth } = Dimensions.get('window');
-const maxWidthPercentage = 80; // Imposta la larghezza massima in percentuale
-
-
+const maxWidthPercentage = 80;
 
 const styles = StyleSheet.create({
   background: {
@@ -38,4 +34,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-})
+});

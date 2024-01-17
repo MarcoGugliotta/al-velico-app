@@ -9,9 +9,6 @@ interface Props {
   title: string;
   subTitle: string;
   topTitleOverLay: number;
-  numLevels: number;
-  numMovements: number;
-  numTutorials: number;
 }
 
 export default function CareerCardComponent({
@@ -20,10 +17,7 @@ export default function CareerCardComponent({
   height,
   title,
   subTitle,
-  topTitleOverLay,
-  numLevels,
-  numMovements,
-  numTutorials,
+  topTitleOverLay
 }: Props) {
   return (
     <TouchableOpacity style={styles.container} activeOpacity={0.7}>
@@ -32,7 +26,6 @@ export default function CareerCardComponent({
         <View style={[styles.textOverlay, { top: topTitleOverLay }]}>
           <Text style={styles.textTitle}>{title}</Text>
           <Text style={styles.textSubTitle}>{subTitle}</Text>
-          <Text style={styles.textInfo}>{`${numLevels} Livelli | ${numMovements} Movimenti | ${numTutorials} Tutorial`}</Text>
         </View>
       </Card>
     </TouchableOpacity>
@@ -56,7 +49,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
   },
   textSubTitle: {
-    fontSize: 22,
+    fontSize: 18,
     color: 'white',
   },
   textInfo: {

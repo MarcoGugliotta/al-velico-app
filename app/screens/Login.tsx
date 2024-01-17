@@ -1,12 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import React, { useState } from 'react'
-import { FIREBASE_AUTH, FIREBASE_DB } from '../../firebaseConfig';
+import { FIREBASE_AUTH } from '../../firebaseConfig';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
-import { doc, getDoc, setDoc } from 'firebase/firestore';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import initializeCareerForUser from '../utils/inizializeCareer';
-import { Icon } from 'react-native-paper';
-import { Header } from 'react-native/Libraries/NewAppScreen';
 import Background from '../components/Background';
 import Logo from '../components/Logo';
 import { theme } from '../core/theme';

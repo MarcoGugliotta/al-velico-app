@@ -4,7 +4,6 @@ import { SafeAreaView } from 'react-native-safe-area-context'
 import { theme } from '../core/theme';
 import FontAwesome from 'react-native-vector-icons/FontAwesome5';
 import CircularProgress from '../components/CircularProgress';
-import { StatusBar } from 'expo-status-bar';
 
 const items = [
     {

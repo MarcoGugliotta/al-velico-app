@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, StyleSheet } from 'react-native';
-import LogoImage from '../assets/logo-al-velico.png';
+import { Logo as LogoImage }  from '../../Images';
 
 export default function Logo() {
   return <Image source={LogoImage} style={styles.image} />;
