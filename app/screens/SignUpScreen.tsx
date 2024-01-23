@@ -13,9 +13,9 @@ import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
 import { FIREBASE_AUTH } from '../../firebaseConfig'
 import { createUserWithEmailAndPassword } from 'firebase/auth'
-import handleUserLogin from '../utils/handleUserLogin'
+import handleUserLogin from '../helpers/handleUserLogin'
 
-export default function SignUp({ navigation }) {
+export default function SignUpScreen({ navigation }) {
   const [name, setName] = useState({ value: '', error: '' })
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })

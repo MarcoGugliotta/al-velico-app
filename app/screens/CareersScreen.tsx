@@ -36,7 +36,7 @@ const items = [
     },
   ];
   
-  export default function Example() {
+  export default function CareersScreen() {
     return (
       <SafeAreaView style={{ backgroundColor: "white", flex:1 }}>
         <ScrollView contentContainerStyle={styles.container}>

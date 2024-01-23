@@ -8,7 +8,7 @@ import Button from '../components/Button'
 import { emailValidator } from '../helpers/emailValidator'
 import { theme } from '../core/theme'
 
-export default function ResetPassword({ navigation }) {
+export default function ResetPasswordScreen({ navigation }) {
   const [email, setEmail] = useState({ value: '', error: '' })
 
   const sendResetPasswordEmail = () => {

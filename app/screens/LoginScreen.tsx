@@ -8,9 +8,9 @@ import { theme } from '../core/theme';
 import BackButton from '../components/BackButton';
 import TextInput from '../components/TextInput';
 import Button from '../components/Button';
-import handleUserLogin from '../utils/handleUserLogin';
+import handleUserLogin from '../helpers/handleUserLogin';
 
-const Login = ({ navigation }) => {
+const LoginScreen = ({ navigation }) => {
     const [email, setEmail] = useState({ value: '', error: '' })
     const [password, setPassword] = useState({ value: '', error: '' })
     const [loading, setLoading] = useState(false);
@@ -111,4 +111,4 @@ const Login = ({ navigation }) => {
       },
     })
 
-    export default Login
+    export default LoginScreen;

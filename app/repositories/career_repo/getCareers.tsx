@@ -52,7 +52,6 @@ export default async function getCareers(): Promise<Career[]>{
                     }
                 })
             );
-
             return {
                 ...levelData,
                 movements: movementsData,

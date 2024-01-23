@@ -6,13 +6,13 @@ import Header from '../components/Header'
 import Paragraph from '../components/Paragraph'
 import Career from '../models/Career'
 import CareerCardComponent from '../components/CareerCardComponent'
-import { ActivityIndicator } from 'react-native-paper'
+import { ActivityIndicator, Text } from 'react-native-paper'
 import { theme } from '../core/theme'
 import getDafaultCareer from '../helpers/getDefaultCareer'
 import getCareers from '../repositories/career_repo/getCareers'
 import addCareer from '../repositories/career_repo/addCareer'
 
-const Home = () => {
+const HomeScreen = ({ navigation }) => {
     const [careers, setCareers] = useState<Career[]>([]);
     const [isLoading, setIsLoading] = useState(false);
 
@@ -20,7 +20,7 @@ const Home = () => {
         const fetchCareers = async () => {
             setIsLoading(true);
             try {
-              const careersData: Career[] = await getCareers();          
+              const careersData: Career[] = await getCareers();      
               setCareers(careersData);
             } catch (error) {
               console.error('Errore nel recupero delle carriere:', error);
@@ -37,7 +37,7 @@ const Home = () => {
             const newCareer = await addCareer(getDafaultCareer());
             setCareers((prevCareers) => [...prevCareers, newCareer]);
           } catch (error) {
-            console.log("Errore nella creazione della Carriera")
+            console.error("Errore nella creazione della Carriera")
           } finally {
             setIsLoading(false);
           }
@@ -50,13 +50,13 @@ const Home = () => {
                 <ActivityIndicator animating={isLoading} color={theme.colors.accent} size="large" />
               </View>
             )}
-            <Header>Home</Header>
-            <Paragraph>Inizia una nuova carriera!</Paragraph>
+            <Text variant='headlineLarge' style={{fontFamily:'rale-b', color:theme.colors.primary}}>Home</Text>
+            <Text variant='bodyLarge' style={{fontFamily:'rale-sb', color:theme.colors.primary}}>Inizia la tua nuova carriera!</Text>
             <View style={{ height: 300 }}>
             <FlatList
             contentContainerStyle={styles.contentContainer}
             horizontal={true}
-            showsHorizontalScrollIndicator={true}
+            showsHorizontalScrollIndicator={false}
             data={careers}
             keyExtractor={(career, index) => `${index}`}
             renderItem={({ item: career }) => (
@@ -67,11 +67,14 @@ const Home = () => {
                 width={280}
                 height={250}
                 topTitleOverLay={140}
+                onPress={() => navigation.navigate('CareerDetailLayout', {
+                                                              screen: 'CareerDetailScreen',
+                                                              params: { career: career },
+                                                            })}
                 />
             )}
             />
             </View>
-            <Paragraph>Inizia una nuova carriera!</Paragraph>
             <Button title="Aggiungi Carriera" onPress={handleCareer} />
         </SafeAreaView>
       );
@@ -101,7 +104,7 @@ const Home = () => {
       },
     });
     
-    export default Home;
+    export default HomeScreen;
 
 // Funzione per contare il numero totale di livelli
 const countLevels = (levels: any[]) => levels.length;

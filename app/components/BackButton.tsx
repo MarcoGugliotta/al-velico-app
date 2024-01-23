@@ -1,6 +1,7 @@
 import React from 'react';
 import { TouchableOpacity, Image, StyleSheet, Dimensions } from 'react-native';
 import { getStatusBarHeight } from 'react-native-status-bar-height';
+import { theme } from '../core/theme';
 
 const { height: screenHeight } = Dimensions.get('window');
 const statusBarHeight = getStatusBarHeight();
@@ -22,7 +23,7 @@ export default function BackButton({ goBack }) {
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
-    left: 4,
+    left: 5,
   },
   image: {
     width: 24,

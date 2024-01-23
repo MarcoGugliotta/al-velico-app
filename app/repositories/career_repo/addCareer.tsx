@@ -5,23 +5,6 @@ import addLevel from '../level_repo/addLevel';
 import addMovement from '../movement_repo/addMovement';
 import addVideoTutorial from '../video_tutorial_repo/addVideoTutorial';
 
-async function createCareerDocument(career: Career) {
-  const careersCollection = collection(FIREBASE_DB, 'careers');
-  const levelsRef = await Promise.all(career.levels.map(addLevel));
-
-  const now = new Date();
-  const careerRef = await addDoc(careersCollection, {
-    name: career.name,
-    actived: false,
-    levels: levelsRef,
-    percentageCompletion: 0,
-    startDate: now,
-    lastUpdate: now,
-  });
-
-  return careerRef.id;
-}
-
 export default async function addCareer(career: Career): Promise<Career> {
   try {
     await Promise.all(
@@ -44,9 +27,19 @@ export default async function addCareer(career: Career): Promise<Career> {
       })
     );
 
-    const careerId = await createCareerDocument(career);
+    const careersCollection = collection(FIREBASE_DB, 'careers');
+  
+    const now = new Date();
+    const careerRef = await addDoc(careersCollection, {
+      name: career.name,
+      actived: false,
+      levels: career.levels,
+      percentageCompletion: 0,
+      startDate: now,
+      lastUpdate: now,
+    });
 
-    return { ...career, id: careerId };
+    return { ...career, id: careerRef.id };
   } catch (error) {
     console.error('Errore durante la creazione della carriera:', error);
     throw error;
